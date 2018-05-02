@@ -17,6 +17,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.dineshyalla.ibuy.UI.BarcodeFetch;
+import com.example.dineshyalla.ibuy.UI.Dashboard;
+import com.example.dineshyalla.ibuy.model.User;
+import com.example.dineshyalla.ibuy.model.UserLogin;
+import com.example.dineshyalla.ibuy.service.UserClient;
+import com.example.dineshyalla.ibuy.service.UserLoginClient;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -25,12 +31,14 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
-    RequestQueue requestQueue;
-    private EditText userName, password;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
-    private static final String URL = "http://ibuyapp-env.us-east-2.elasticbeanstalk.com/webapi/myresource/signIn";
-    private StringRequest request;
+public class MainActivity extends AppCompatActivity {
+
+    EditText userName, password;
     TextView textView2;
     TextView login;
 
@@ -44,36 +52,21 @@ public class MainActivity extends AppCompatActivity {
         password = (EditText)findViewById(R.id.editText2);
         login = (TextView)findViewById(R.id.textView);
 
-        requestQueue = Volley.newRequestQueue(this);
 
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // Toast.makeText(getApplicationContext(), "Incorrect password", Toast.LENGTH_SHORT).show();
-                request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Toast.makeText(getApplicationContext(), "Response", Toast.LENGTH_SHORT).show();
 
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), "Error with CAll", Toast.LENGTH_SHORT).show();
+                UserLogin userLogin = new UserLogin(
+                        userName.getText().toString(),
+                        password.getText().toString()
+                );
+                Toast.makeText(getApplicationContext(), "Input Success", Toast.LENGTH_SHORT).show();
+                //setNetworkRequest(userLogin);
 
-                    }
-                }){
-                    @Override
-                    protected Map<String, String> getParams() throws AuthFailureError {
-                        HashMap<String,String> hashMap = new HashMap<>();
-                        hashMap.put("customerName", userName.getText().toString());
-                        hashMap.put("password", password.getText().toString());
-                        return hashMap;
-                    }
-                };
-                requestQueue.add(request);
-                Toast.makeText(getApplicationContext(), "queue", Toast.LENGTH_SHORT).show();
+               Call();
+
             }
         });
 
@@ -83,6 +76,35 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, SignUp.class);
                 startActivity(intent);
+            }
+        });
+    }
+
+    private void Call(){
+        Intent intent = new Intent( this, Dashboard.class);
+        startActivity(intent);
+    }
+
+    private void setNetworkRequest(UserLogin userLogin){
+        //create retrofit instance
+        Retrofit.Builder builder = new Retrofit.Builder()
+                .baseUrl("http://ibuyapp-env.us-east-2.elasticbeanstalk.com/webapi/myresource/")
+                .addConverterFactory(GsonConverterFactory.create());
+
+        Retrofit retrofit = builder.build();
+        UserLoginClient client = retrofit.create(UserLoginClient.class);
+        Call<UserLogin> call = client.loginAccount(userLogin);
+
+        call.enqueue(new Callback<UserLogin>() {
+            @Override
+            public void onResponse(Call<UserLogin> call, retrofit2.Response<UserLogin> response) {
+                Toast.makeText(getApplicationContext(), "Success Response", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<UserLogin> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Failure Response" + t, Toast.LENGTH_SHORT).show();
+                Log.d("error is :",  ""+ t);
             }
         });
     }

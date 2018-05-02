@@ -63,7 +63,8 @@ public class SignUp extends AppCompatActivity {
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                Toast.makeText(getApplicationContext(), "Success Response", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
+                Log.d("Success Response is:", ""+ response.body().getClass());
             }
 
             @Override
