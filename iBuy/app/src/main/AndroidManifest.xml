@@ -21,6 +21,7 @@
         <activity android:name=".SignUp" />
         <activity android:name=".UI.Dashboard" />
         <activity android:name=".UI.BarcodeFetch"></activity>
+        <activity android:name=".UI.ViewListContents"></activity>
     </application>
 
 </manifest>
