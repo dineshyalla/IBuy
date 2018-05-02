@@ -12,13 +12,26 @@ import android.widget.Toast;
 
 import com.example.dineshyalla.ibuy.Database.DatabaseHelper;
 import com.example.dineshyalla.ibuy.R;
+import com.example.dineshyalla.ibuy.model.Product;
+import com.example.dineshyalla.ibuy.model.ProductClientClass;
+import com.example.dineshyalla.ibuy.service.ProductClient;
 
 import java.util.ArrayList;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class BarcodeFetch extends AppCompatActivity {
 
+    public String barcode = "01020306";
+    public String fName="";
+    public String lName="";
+    public String fFood="";
     EditText etFirstName,etLastName,etFavFood;
-    Button btnAdd,btnView;
+    Button btnAdd,btnView, btnCall;
     DatabaseHelper myDB;
     public ArrayList<String> listBarcode;
     @Override
@@ -39,7 +52,17 @@ public class BarcodeFetch extends AppCompatActivity {
         etLastName = (EditText) findViewById(R.id.etLastName);
         btnAdd = (Button) findViewById(R.id.btnAdd);
         btnView = (Button) findViewById(R.id.btnView);
+        btnCall = (Button) findViewById(R.id.btnFetch);
         myDB = new DatabaseHelper(this);
+
+        btnCall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Toast.makeText(BarcodeFetch.this,"Fetch Toast",Toast.LENGTH_LONG).show();
+
+                 setNetworkRequest();
+            }
+        });
 
         btnView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,9 +75,9 @@ public class BarcodeFetch extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String fName = etFirstName.getText().toString();
-                String lName = etLastName.getText().toString();
-                String fFood = etFavFood.getText().toString();
+                //String fName = etFirstName.getText().toString();
+               // String lName = etLastName.getText().toString();
+               // String fFood = etFavFood.getText().toString();
                 if(fName.length() != 0 && lName.length() != 0 && fFood.length() != 0){
                     AddData(fName,lName, fFood);
                     etFavFood.setText("");
@@ -66,6 +89,33 @@ public class BarcodeFetch extends AppCompatActivity {
             }
         });
     }
+
+    private void setNetworkRequest() {
+
+        //create retrofit instance
+        Retrofit.Builder builder = new Retrofit.Builder()
+                .baseUrl("http://ibuyapp-env.us-east-2.elasticbeanstalk.com/webapi/myresource/")
+                .addConverterFactory(GsonConverterFactory.create());
+        Retrofit retrofit = builder.build();
+        ProductClient client = retrofit.create(ProductClient.class);
+        Call<ProductClientClass> call = client.getProduct(barcode);
+        call.enqueue(new Callback<ProductClientClass>() {
+            @Override
+            public void onResponse(Call<ProductClientClass> call, Response<ProductClientClass> response) {
+                Toast.makeText(getApplicationContext(), "Success" + " " + response.body().getProductName(), Toast.LENGTH_SHORT).show();
+                fName = fName + response.body().getProductName();
+                lName = lName + response.body().getWeight();
+                fFood = fFood + response.body().getProductprice();
+            }
+
+            @Override
+            public void onFailure(Call<ProductClientClass> call, Throwable t) {
+
+            }
+        });
+
+    }
+
 
     public void AddData(String firstName,String lastName, String favFood ){
         boolean insertData = myDB.addData(firstName,lastName,favFood);
