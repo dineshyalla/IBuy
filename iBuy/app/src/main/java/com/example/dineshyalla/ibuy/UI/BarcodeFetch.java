@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,7 +32,8 @@ public class BarcodeFetch extends AppCompatActivity {
     public String lName="";
     public String fFood="";
     EditText etFirstName,etLastName,etFavFood;
-    Button btnAdd,btnView, btnCall;
+    Button btnAdd, btnCall;
+    ImageView img;
     DatabaseHelper myDB;
     public ArrayList<String> listBarcode;
     @Override
@@ -51,8 +53,9 @@ public class BarcodeFetch extends AppCompatActivity {
         etFirstName = (EditText) findViewById(R.id.etFirstName);
         etLastName = (EditText) findViewById(R.id.etLastName);
         btnAdd = (Button) findViewById(R.id.btnAdd);
-        btnView = (Button) findViewById(R.id.btnView);
+        Button btnView = (Button) findViewById(R.id.btnView);
         btnCall = (Button) findViewById(R.id.btnFetch);
+        img = (ImageView) findViewById(R.id.cartView);
         myDB = new DatabaseHelper(this);
 
         btnCall.setOnClickListener(new View.OnClickListener() {
@@ -71,6 +74,7 @@ public class BarcodeFetch extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override

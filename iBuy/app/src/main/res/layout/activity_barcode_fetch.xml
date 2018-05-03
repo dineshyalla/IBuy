@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient"
     tools:context=".UI.BarcodeFetch">
 
     <TextView
@@ -24,9 +25,9 @@
         android:id="@+id/btnView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="43dp"
+        android:layout_marginBottom="118dp"
         android:text="View Cart" />
 
     <Button
@@ -71,5 +72,15 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="Price" />
+
+    <ImageView
+        android:id="@+id/cartView"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_above="@+id/btnFetch"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="-43dp"
+        android:layout_marginEnd="5dp"
+        app:srcCompat="@drawable/ic_cart" />
 
 </RelativeLayout>

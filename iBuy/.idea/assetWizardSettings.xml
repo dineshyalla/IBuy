@@ -44,7 +44,7 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="outputName" value="ic_action_Logo" />
+                                      <entry key="outputName" value="ic_cart" />
                                       <entry key="theme" value="HOLO_DARK" />
                                       <entry key="themeColor" value="2d76c5" />
                                     </map>
