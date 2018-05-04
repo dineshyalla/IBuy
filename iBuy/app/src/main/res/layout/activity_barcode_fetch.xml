@@ -13,36 +13,17 @@
         android:layout_height="wrap_content" />
 
     <Button
-        android:id="@+id/btnAdd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-      android:layout_alignParentBottom="true"
-
-
-        android:text="ADD to Cart" />
-
-    <Button
-        android:id="@+id/btnView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="118dp"
-        android:text="View Cart" />
-
-    <Button
         android:id="@+id/btnFetch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/barcodeView"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="43dp"
 
-        android:layout_marginBottom="44dp"
+        android:layout_alignParentBottom="true"
 
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="85dp"
         android:text="Get Items Details" />
 
-    <EditText
+    <TextView
         android:id="@+id/etFirstName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -51,9 +32,10 @@
         android:layout_marginTop="132dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:hint="Product Name" />
+        android:hint="Product Name"
+        android:textColor="#FFFF"/>
 
-    <EditText
+    <TextView
         android:id="@+id/etLastName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -62,25 +44,58 @@
         android:layout_marginTop="206dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:hint="Weight" />
+        android:hint="Weight"
+        android:textColor="#FFFF"/>
 
-    <EditText
+    <TextView
         android:id="@+id/etFavFood"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:ems="10"
         android:inputType="textPersonName"
-        android:hint="Price" />
+        android:hint="Price"
+        android:textColor="#FFFF"/>
 
     <ImageView
         android:id="@+id/cartView"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:layout_above="@+id/btnFetch"
         android:layout_alignParentEnd="true"
-        android:layout_marginBottom="-43dp"
-        android:layout_marginEnd="5dp"
+        android:layout_alignParentTop="true"
         app:srcCompat="@drawable/ic_cart" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="15dp"
+            app:cardBackgroundColor="#afdd7c"
+            app:cardCornerRadius="25dp"
+            app:cardElevation="10dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/txtAdd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="Add to cart"
+                    android:textAllCaps="true"
+                    android:textColor="#fff"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+    </RelativeLayout>
 
 </RelativeLayout>

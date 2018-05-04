@@ -27,13 +27,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class BarcodeFetch extends AppCompatActivity {
 
-    public String barcode = "01020306";
+    public String barcode = "";
     public String fName="";
     public String lName="";
     public String fFood="";
-    EditText etFirstName,etLastName,etFavFood;
-    Button btnAdd, btnCall;
+    TextView etFirstName,etLastName,etFavFood;
+    Button btnCall;
     ImageView img;
+    TextView txtAdd;
     DatabaseHelper myDB;
     public ArrayList<String> listBarcode;
     @Override
@@ -47,13 +48,13 @@ public class BarcodeFetch extends AppCompatActivity {
         for (String str : listBarcode) {
             textView.setText(str);
             Log.d("msg", str);
+            barcode = str;
         }
 
-        etFavFood = (EditText) findViewById(R.id.etFavFood);
-        etFirstName = (EditText) findViewById(R.id.etFirstName);
-        etLastName = (EditText) findViewById(R.id.etLastName);
-        btnAdd = (Button) findViewById(R.id.btnAdd);
-        Button btnView = (Button) findViewById(R.id.btnView);
+        etFavFood = (TextView) findViewById(R.id.etFavFood);
+        etFirstName = (TextView) findViewById(R.id.etFirstName);
+        etLastName = (TextView) findViewById(R.id.etLastName);
+        txtAdd = (TextView) findViewById(R.id.txtAdd);
         btnCall = (Button) findViewById(R.id.btnFetch);
         img = (ImageView) findViewById(R.id.cartView);
         myDB = new DatabaseHelper(this);
@@ -64,24 +65,25 @@ public class BarcodeFetch extends AppCompatActivity {
                 //Toast.makeText(BarcodeFetch.this,"Fetch Toast",Toast.LENGTH_LONG).show();
 
                  setNetworkRequest();
+
             }
         });
 
-        btnView.setOnClickListener(new View.OnClickListener() {
+
+        img.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 Intent intent = new Intent(BarcodeFetch.this,ViewListContents.class);
                 startActivity(intent);
             }
         });
 
 
-        btnAdd.setOnClickListener(new View.OnClickListener() {
+
+
+        txtAdd.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                //String fName = etFirstName.getText().toString();
-               // String lName = etLastName.getText().toString();
-               // String fFood = etFavFood.getText().toString();
+            public void onClick(View view) {
                 if(fName.length() != 0 && lName.length() != 0 && fFood.length() != 0){
                     AddData(fName,lName, fFood);
                     etFavFood.setText("");
@@ -110,6 +112,11 @@ public class BarcodeFetch extends AppCompatActivity {
                 fName = fName + response.body().getProductName();
                 lName = lName + response.body().getWeight();
                 fFood = fFood + response.body().getProductprice();
+
+                etFirstName.setText(fName);
+                etLastName.setText(lName);
+                etFavFood.setText(fFood);
+
             }
 
             @Override
