@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#427a66">
+    android:background="@drawable/gradient">
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
         android:layout_height="400dp"
@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="18dp"
-            android:divider="#427a66"
+            android:divider="@drawable/gradient"
             android:dividerHeight="10.0sp"
             android:background="#FFFFFF" />
 
@@ -27,7 +27,7 @@
         android:layout_alignParentBottom="true"
         android:layout_below="@id/linear_layout"
         android:layout_margin="10dp"
-        android:background="#1b5440">
+        android:background="#676777">
 
         <TextView
             android:id="@+id/totalView"
@@ -43,7 +43,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="15dp"
-            app:cardBackgroundColor="#afdd7c"
+            app:cardBackgroundColor="@color/colorAccent"
             app:cardCornerRadius="25dp"
             app:cardElevation="10dp">
 
