@@ -27,6 +27,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class BarcodeFetch extends AppCompatActivity {
 
+    public int price = 0;
+    public int tempPrice = 0;
     public String barcode = "";
     public String fName="";
     public String lName="";
@@ -73,7 +75,9 @@ public class BarcodeFetch extends AppCompatActivity {
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String priceString = Integer.toString(price);
                 Intent intent = new Intent(BarcodeFetch.this,ViewListContents.class);
+                intent.putExtra("price", priceString);
                 startActivity(intent);
             }
         });
@@ -84,8 +88,12 @@ public class BarcodeFetch extends AppCompatActivity {
         txtAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                price = price + tempPrice;
+                String fPrice = Integer.toString(price);
                 if(fName.length() != 0 && lName.length() != 0 && fFood.length() != 0){
-                    AddData(fName,lName, fFood);
+                    Toast.makeText(BarcodeFetch.this,"Price" + fPrice,Toast.LENGTH_LONG).show();
+
+                    AddData(fName,lName, fFood, fPrice);
                     etFavFood.setText("");
                     etLastName.setText("");
                     etFirstName.setText("");
@@ -111,8 +119,8 @@ public class BarcodeFetch extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Success" + " " + response.body().getProductName(), Toast.LENGTH_SHORT).show();
                 fName = fName + response.body().getProductName();
                 lName = lName + response.body().getWeight();
-                fFood = fFood + response.body().getProductprice();
-
+                fFood = fFood + response.body().getProductprice() + "$";
+                tempPrice = tempPrice + response.body().getProductprice();
                 etFirstName.setText(fName);
                 etLastName.setText(lName);
                 etFavFood.setText(fFood);
@@ -128,8 +136,8 @@ public class BarcodeFetch extends AppCompatActivity {
     }
 
 
-    public void AddData(String firstName,String lastName, String favFood ){
-        boolean insertData = myDB.addData(firstName,lastName,favFood);
+    public void AddData(String firstName,String lastName, String favFood, String fPrice){
+        boolean insertData = myDB.addData(firstName,lastName,favFood,fPrice);
 
         if(insertData==true){
             Toast.makeText(BarcodeFetch.this,"Successfully Entered Data!",Toast.LENGTH_LONG).show();

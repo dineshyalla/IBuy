@@ -16,9 +16,7 @@
         android:id="@+id/btnFetch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:layout_alignParentBottom="true"
-
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="85dp"
         android:text="Get Items Details" />
@@ -33,7 +31,8 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="Product Name"
-        android:textColor="#FFFF"/>
+        android:textColor="#FFFF"
+        android:textAlignment="center"/>
 
     <TextView
         android:id="@+id/etLastName"
@@ -45,7 +44,8 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="Weight"
-        android:textColor="#FFFF"/>
+        android:textColor="#FFFF"
+        android:textAlignment="center"/>
 
     <TextView
         android:id="@+id/etFavFood"
@@ -55,7 +55,8 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="Price"
-        android:textColor="#FFFF"/>
+        android:textColor="#FFFF"
+        android:textAlignment="center"/>
 
     <ImageView
         android:id="@+id/cartView"

@@ -14,6 +14,8 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
     public static final String COL2 = "FIRSTNAME";
     public static final String COL3 = "LASTNAME";
     public static final String COL4 = "FAVFOOD";
+    public static final String COL5 = "PRICE";
+
 
 
     public DatabaseHelper(Context context) {
@@ -23,7 +25,7 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createTable = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                " FIRSTNAME TEXT, LASTNAME TEXT, FAVFOOD TEXT)";
+                " FIRSTNAME TEXT, LASTNAME TEXT, FAVFOOD TEXT, PRICE TEXT)";
         db.execSQL(createTable);
     }
 
@@ -33,12 +35,13 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean addData(String fName, String lName, String fFood) {
+    public boolean addData(String fName, String lName, String fFood, String fPrice) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL2, fName);
         contentValues.put(COL3, lName);
         contentValues.put(COL4, fFood);
+        contentValues.put(COL5, fPrice);
 
         long result = db.insert(TABLE_NAME, null, contentValues);
 

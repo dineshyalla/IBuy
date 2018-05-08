@@ -5,10 +5,12 @@ public class Product {
     private String LastName;
     private String FavFood;
 
+
     public Product(String fName,String lName, String fFood){
         FirstName = fName;
         LastName = lName;
         FavFood = fFood;
+
     }
 
     public String getFirstName() {

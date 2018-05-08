@@ -3,7 +3,7 @@ package com.example.dineshyalla.ibuy.model;
 public class ProductClientClass {
     int id;
     String productName;
-    int productprice;
+    int productPrice;
     int weight;
     int aisleNo;
 
@@ -16,7 +16,7 @@ public class ProductClientClass {
     }
 
     public int getProductprice() {
-        return productprice;
+        return productPrice;
     }
 
     public int getWeight() {
