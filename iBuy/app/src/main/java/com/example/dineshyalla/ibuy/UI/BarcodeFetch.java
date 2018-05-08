@@ -91,7 +91,7 @@ public class BarcodeFetch extends AppCompatActivity {
                 price = price + tempPrice;
                 String fPrice = Integer.toString(price);
                 if(fName.length() != 0 && lName.length() != 0 && fFood.length() != 0){
-                    Toast.makeText(BarcodeFetch.this,"Price" + fPrice,Toast.LENGTH_LONG).show();
+                    Toast.makeText(BarcodeFetch.this,"Price: " + fPrice,Toast.LENGTH_LONG).show();
 
                     AddData(fName,lName, fFood, fPrice);
                     etFavFood.setText("");
@@ -116,7 +116,7 @@ public class BarcodeFetch extends AppCompatActivity {
         call.enqueue(new Callback<ProductClientClass>() {
             @Override
             public void onResponse(Call<ProductClientClass> call, Response<ProductClientClass> response) {
-                Toast.makeText(getApplicationContext(), "Success" + " " + response.body().getProductName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Success " + " " + response.body().getProductName(), Toast.LENGTH_SHORT).show();
                 fName = fName + response.body().getProductName();
                 lName = lName + response.body().getWeight();
                 fFood = fFood + response.body().getProductprice() + "$";

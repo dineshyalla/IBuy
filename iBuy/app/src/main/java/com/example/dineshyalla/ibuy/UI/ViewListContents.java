@@ -112,7 +112,6 @@ public int price = 0;
                 Intent intent = new Intent(ViewListContents.this, QRCode.class);
                 intent.putExtra("qrcode", qrcode);
                 startActivity(intent);
-
             }
         });
     }
@@ -128,7 +127,7 @@ public int price = 0;
         call.enqueue(new Callback<Payment>() {
             @Override
             public void onResponse(Call<Payment> call, Response<Payment> response) {
-                Toast.makeText(getApplicationContext(), "Success: Qrcode is: " + qrcode, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "SUCCESSFUL PAYMENT ", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -141,6 +140,8 @@ public int price = 0;
     @Override
     public void onProductPurchased(@NonNull String productId, @Nullable TransactionDetails details) {
         Toast.makeText(this, "You've purchased something",Toast.LENGTH_SHORT).show();
+
+
     }
 
     @Override
@@ -162,6 +163,7 @@ public int price = 0;
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         if (!bp.handleActivityResult(requestCode, resultCode, data)) {
             super.onActivityResult(requestCode, resultCode, data);
+
         }
     }
     

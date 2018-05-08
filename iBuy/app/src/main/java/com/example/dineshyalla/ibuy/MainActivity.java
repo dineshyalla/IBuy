@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
                         userName.getText().toString(),
                         password.getText().toString()
                 );
-                Toast.makeText(getApplicationContext(), "Input Success", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "LOGGED IN", Toast.LENGTH_SHORT).show();
                 //setNetworkRequest(userLogin);
 
                Call();
