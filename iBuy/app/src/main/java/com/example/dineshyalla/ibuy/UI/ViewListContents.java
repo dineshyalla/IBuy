@@ -15,6 +15,7 @@ import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.TransactionDetails;
 import com.example.dineshyalla.ibuy.Database.DatabaseHelper;
 import com.example.dineshyalla.ibuy.Database.ThreeColumn_ListAdapter;
+import com.example.dineshyalla.ibuy.QRCode;
 import com.example.dineshyalla.ibuy.R;
 import com.example.dineshyalla.ibuy.model.Order;
 import com.example.dineshyalla.ibuy.model.Payment;
@@ -82,7 +83,7 @@ public int price = 0;
                 Order order = new Order(id, data.getString(1), 3);
                 list.add(order);
             }
-            String s = Integer.toString(price);
+            String s = "Total Price: " + Integer.toString(price) + '$';
             total.setText(s);
             ThreeColumn_ListAdapter adapter =  new ThreeColumn_ListAdapter(this,R.layout.list_adapter_view, userList);
             listView = (ListView) findViewById(R.id.listView);
@@ -108,6 +109,9 @@ public int price = 0;
                 );
 
                 paymentPost(payment);
+                Intent intent = new Intent(ViewListContents.this, QRCode.class);
+                intent.putExtra("qrcode", qrcode);
+                startActivity(intent);
 
             }
         });
