@@ -1,5 +1,6 @@
 package com.example.dineshyalla.ibuy;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,14 +20,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SignUp extends AppCompatActivity {
 
-    TextView signup;
+    TextView signup, textView2;
     EditText name, email, password, phone;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-
+        textView2 = (TextView)findViewById(R.id.textView2);
         signup = (TextView)findViewById(R.id.signUp);
         name = (EditText) findViewById(R.id.customerName);
         email = (EditText) findViewById(R.id.email);
@@ -43,9 +44,17 @@ public class SignUp extends AppCompatActivity {
                         phone.getText().toString()
 
                 );
-                Toast.makeText(getApplicationContext(), "Input Success", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getApplicationContext(), "Input Success", Toast.LENGTH_SHORT).show();
                 setNetworkRequest(user);
                // Log.d("User obj is: ", ""+user.toString());
+            }
+        });
+
+        textView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SignUp.this, MainActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -63,8 +72,8 @@ public class SignUp extends AppCompatActivity {
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
-                Log.d("Success Response is:", ""+ response.body().getClass());
+                Toast.makeText(getApplicationContext(), "Successful Sign Up", Toast.LENGTH_SHORT).show();
+                Log.d("Success Response is:", ""+ response.body().getResult());
             }
 
             @Override

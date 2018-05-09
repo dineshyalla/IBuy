@@ -9,17 +9,15 @@
 
     <TextView
         android:id="@+id/barcodeView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <Button
-        android:id="@+id/btnFetch"
-        android:layout_width="wrap_content"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/cartView"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="85dp"
-        android:text="Get Items Details" />
+        android:textAlignment="center"
+        android:hint="Barcode Number"
+        android:textColorHint="#FFF"
+        android:textColor="#FFF"/>
+
 
     <TextView
         android:id="@+id/etFirstName"
@@ -27,13 +25,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="132dp"
+        android:layout_marginTop="141dp"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="Product Name"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
         android:textColor="#FFFF"
-        android:textColorHint="#FFF"
-        android:textAlignment="center"/>
+        android:textColorHint="#FFF" />
 
     <TextView
         android:id="@+id/etLastName"
@@ -41,13 +39,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="206dp"
+        android:layout_marginTop="200dp"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="Weight"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
         android:textColor="#FFFF"
-        android:textColorHint="#FFF"
-        android:textAlignment="center"/>
+        android:textColorHint="#FFF" />
 
     <TextView
         android:id="@+id/etFavFood"
@@ -55,11 +53,11 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="Price"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
         android:textColor="#FFFF"
-        android:textColorHint="#FFF"
-        android:textAlignment="center"/>
+        android:textColorHint="#FFF" />
 
     <ImageView
         android:id="@+id/cartView"
@@ -71,17 +69,43 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true">
+        android:layout_alignParentBottom="true">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="49dp"
+            app:cardBackgroundColor="@color/colorAccent"
+            app:cardCornerRadius="25dp"
+            app:cardElevation="10dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/btnFetch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="Get Item Details"
+                    android:textAllCaps="true"
+                    android:textColor="#fff"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="15dp"
-            app:cardBackgroundColor="#afdd7c"
+            android:layout_marginBottom="31dp"
+            app:cardBackgroundColor="@color/colorAccent"
             app:cardCornerRadius="25dp"
             app:cardElevation="10dp">
 

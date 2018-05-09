@@ -33,8 +33,7 @@ public class BarcodeFetch extends AppCompatActivity {
     public String fName="";
     public String lName="";
     public String fFood="";
-    TextView etFirstName,etLastName,etFavFood;
-    Button btnCall;
+    TextView etFirstName,etLastName,etFavFood, btnFetch;
     ImageView img;
     TextView txtAdd;
     DatabaseHelper myDB;
@@ -57,20 +56,17 @@ public class BarcodeFetch extends AppCompatActivity {
         etFirstName = (TextView) findViewById(R.id.etFirstName);
         etLastName = (TextView) findViewById(R.id.etLastName);
         txtAdd = (TextView) findViewById(R.id.txtAdd);
-        btnCall = (Button) findViewById(R.id.btnFetch);
         img = (ImageView) findViewById(R.id.cartView);
+        btnFetch = (TextView)findViewById(R.id.btnFetch);
+
         myDB = new DatabaseHelper(this);
 
-        btnCall.setOnClickListener(new View.OnClickListener() {
+        btnFetch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Toast.makeText(BarcodeFetch.this,"Fetch Toast",Toast.LENGTH_LONG).show();
-
-                 setNetworkRequest();
-
+                setNetworkRequest();
             }
         });
-
 
         img.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,7 +136,7 @@ public class BarcodeFetch extends AppCompatActivity {
         boolean insertData = myDB.addData(firstName,lastName,favFood,fPrice);
 
         if(insertData==true){
-            Toast.makeText(BarcodeFetch.this,"Successfully Entered Data!",Toast.LENGTH_LONG).show();
+            Toast.makeText(BarcodeFetch.this,"Item Added To Cart!",Toast.LENGTH_LONG).show();
         }else{
             Toast.makeText(BarcodeFetch.this,"Something went wrong :(.",Toast.LENGTH_LONG).show();
         }

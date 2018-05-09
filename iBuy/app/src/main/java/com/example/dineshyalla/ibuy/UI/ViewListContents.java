@@ -57,7 +57,7 @@ public int price = 0;
         TextView total = (TextView)findViewById(R.id.totalView);
 
 
-        bp = new BillingProcessor(this, null, null);
+        bp = new BillingProcessor(this, null, this);
 
         textView =(TextView)findViewById(R.id.textView);
 
@@ -90,6 +90,7 @@ public int price = 0;
             listView.setAdapter(adapter);
         }
 
+
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -109,9 +110,7 @@ public int price = 0;
                 );
 
                 paymentPost(payment);
-                Intent intent = new Intent(ViewListContents.this, QRCode.class);
-                intent.putExtra("qrcode", qrcode);
-                startActivity(intent);
+
             }
         });
     }
@@ -139,7 +138,12 @@ public int price = 0;
 
     @Override
     public void onProductPurchased(@NonNull String productId, @Nullable TransactionDetails details) {
+
         Toast.makeText(this, "You've purchased something",Toast.LENGTH_SHORT).show();
+        bp.consumePurchase("android.test.purchased");
+        Intent intent = new Intent(ViewListContents.this, QRCode.class);
+        intent.putExtra("qrcode", qrcode);
+        startActivity(intent);
 
 
     }

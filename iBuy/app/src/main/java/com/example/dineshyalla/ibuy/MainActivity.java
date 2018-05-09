@@ -62,10 +62,10 @@ public class MainActivity extends AppCompatActivity {
                         userName.getText().toString(),
                         password.getText().toString()
                 );
-                Toast.makeText(getApplicationContext(), "LOGGED IN", Toast.LENGTH_SHORT).show();
-                //setNetworkRequest(userLogin);
+               // Toast.makeText(getApplicationContext(), "LOGGED IN", Toast.LENGTH_SHORT).show();
+                setNetworkRequest(userLogin);
 
-               Call();
+              // Call();
 
             }
         });
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         textView2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, Main2Activity.class);
+                Intent intent = new Intent(MainActivity.this, SignUp.class);
                 startActivity(intent);
             }
         });
@@ -98,7 +98,16 @@ public class MainActivity extends AppCompatActivity {
         call.enqueue(new Callback<UserLogin>() {
             @Override
             public void onResponse(Call<UserLogin> call, retrofit2.Response<UserLogin> response) {
-                Toast.makeText(getApplicationContext(), "Success Response", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "" + response.body().getResult(), Toast.LENGTH_SHORT).show();
+
+                String res = response.body().getResult();
+                if(res.equals("ValidUser")){
+                    Call();
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "AUTHENTICATION FAILED" + response.body().getResult(), Toast.LENGTH_SHORT).show();
+                }
+
             }
 
             @Override
