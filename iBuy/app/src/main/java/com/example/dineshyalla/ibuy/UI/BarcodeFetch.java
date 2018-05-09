@@ -33,7 +33,7 @@ public class BarcodeFetch extends AppCompatActivity {
     public String fName="";
     public String lName="";
     public String fFood="";
-    TextView etFirstName,etLastName,etFavFood, btnFetch;
+    TextView etFirstName,etLastName,etFavFood, btnFetch, btnScan;
     ImageView img;
     TextView txtAdd;
     DatabaseHelper myDB;
@@ -58,6 +58,7 @@ public class BarcodeFetch extends AppCompatActivity {
         txtAdd = (TextView) findViewById(R.id.txtAdd);
         img = (ImageView) findViewById(R.id.cartView);
         btnFetch = (TextView)findViewById(R.id.btnFetch);
+        btnScan = (TextView)findViewById(R.id.btnScan);
 
         myDB = new DatabaseHelper(this);
 
@@ -74,6 +75,14 @@ public class BarcodeFetch extends AppCompatActivity {
                 String priceString = Integer.toString(price);
                 Intent intent = new Intent(BarcodeFetch.this,ViewListContents.class);
                 intent.putExtra("price", priceString);
+                startActivity(intent);
+            }
+        });
+
+        btnScan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(BarcodeFetch.this,Dashboard.class);
                 startActivity(intent);
             }
         });
