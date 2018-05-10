@@ -46,11 +46,14 @@ public class BarcodeFetch extends AppCompatActivity {
         Intent intent = getIntent();
         listBarcode = intent.getStringArrayListExtra("test");
         TextView textView = (TextView) findViewById(R.id.barcodeView);
-        for (String str : listBarcode) {
-            textView.setText(str);
-            Log.d("msg", str);
-            barcode = str;
+        if(listBarcode.size()>0){
+            for (String str : listBarcode) {
+                textView.setText(str);
+                Log.d("msg", str);
+                barcode = str;
+            }
         }
+
 
         etFavFood = (TextView) findViewById(R.id.etFavFood);
         etFirstName = (TextView) findViewById(R.id.etFirstName);
@@ -124,7 +127,7 @@ public class BarcodeFetch extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Success " + " " + response.body().getProductName(), Toast.LENGTH_SHORT).show();
                 fName = fName + response.body().getProductName();
                 lName = lName + response.body().getWeight();
-                fFood = fFood + response.body().getProductprice() + "$";
+                fFood = fFood + "$"+response.body().getProductprice();
                 tempPrice = tempPrice + response.body().getProductprice();
                 etFirstName.setText(fName);
                 etLastName.setText(lName);

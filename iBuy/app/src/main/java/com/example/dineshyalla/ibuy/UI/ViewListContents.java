@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,6 +48,7 @@ public int price = 0;
     ListView listView;
     Product product;
     TextView textView;
+    ImageView imgBack;
     BillingProcessor bp;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,7 +62,7 @@ public int price = 0;
         bp = new BillingProcessor(this, null, this);
 
         textView =(TextView)findViewById(R.id.textView);
-
+        imgBack = (ImageView)findViewById(R.id.imgBack);
 
         myDB = new DatabaseHelper(this);
         userList = new ArrayList<>();
@@ -83,13 +85,20 @@ public int price = 0;
                 Order order = new Order(id, data.getString(1), 3);
                 list.add(order);
             }
-            String s = "Total Price: " + Integer.toString(price) + '$';
+            String s = "Total Price: " + "$" +Integer.toString(price);
             total.setText(s);
             ThreeColumn_ListAdapter adapter =  new ThreeColumn_ListAdapter(this,R.layout.list_adapter_view, userList);
             listView = (ListView) findViewById(R.id.listView);
             listView.setAdapter(adapter);
         }
 
+        imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ViewListContents.this, Dashboard.class);
+                startActivity(intent);
+            }
+        });
 
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
